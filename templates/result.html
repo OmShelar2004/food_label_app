@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Analysis Result</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+<div class="container">
+    <h1>Ingredient Analysis</h1>
+    <p class="subtitle">
+        Here’s a simple breakdown of what we found
+    </p>
+
+   {% if report %}
+    {% for item in report %}
+        <div class="card {% if item.level == 'High' %}high{% else %}medium{% endif %}">
+            <b>{{ item.ingredient }}</b><br>
+            {{ item.reason }}
+        </div>
+    {% endfor %}
+{% else %}
+    <div class="card medium">
+        ⚠️ Could not confidently detect risky ingredients from the image.<br>
+        This may be due to unclear text or OCR limitations.
+    </div>
+{% endif %}
+<!-- FINAL VERDICT -->
+<div class="verdict 
+    {% if 'Avoid' in verdict %}red
+    {% elif 'Ultra' in verdict or 'occasionally' in verdict %}yellow
+    {% else %}yellow
+    {% endif %}">
+    {{ verdict }}
+</div>
+
+    <div class="verdict 
+        {% if 'Avoid' in verdict %}
+    red
+{% elif 'Relatively safe' in verdict %}
+    green
+{% else %}
+    yellow
+{% endif %}
+
+        {{ verdict }}
+    </div>
+
+    <p class="footer-note">
+        This analysis focuses on ingredient quality, not calories or portion size.
+    </p>
+
+    <a href="/">Analyze another product</a>
+</div>
+
+</body>
+</html>

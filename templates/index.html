@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Food Label Analyzer</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+<div class="container">
+    <h1>Food Label Analyzer</h1>
+    <p class="subtitle">
+        Upload a food label and understand what’s really inside 🧠
+    </p>
+
+    <div class="upload-box">
+        <form method="POST" enctype="multipart/form-data">
+            <input type="file" name="image" required>
+            <br>
+            <button type="submit">Analyze Label</button>
+        </form>
+    </div>
+
+    <p class="footer-note">
+        Educational use only • Not medical advice
+    </p>
+</div>
+
+</body>
+</html>
